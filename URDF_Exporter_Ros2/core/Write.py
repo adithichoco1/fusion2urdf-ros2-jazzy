@@ -132,6 +132,8 @@ def write_urdf(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_n
         f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/{}.trans" />'.format(package_name, robot_name))
         f.write('\n')
+        f.write('<xacro:include filename="$(find {})/urdf/{}.ros2_control.xacro" />'.format(package_name, robot_name))
+        f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/{}.gazebo" />'.format(package_name, robot_name))
         f.write('\n')
 
@@ -221,7 +223,10 @@ def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name,
 
         gazebo = Element('gazebo')
         plugin = SubElement(gazebo, 'plugin')
-        plugin.attrib = {'name':'control', 'filename':'libgazebo_ros_control.so'}
+        plugin.attrib = {
+            'name': 'gz_ros2_control::GazeboSimROS2ControlPlugin',
+            'filename': 'libgz_ros2_control-system.so'
+        }
         gazebo_xml = "\n".join(utils.prettify(gazebo).split("\n")[1:])
         f.write(gazebo_xml)
 
@@ -290,3 +295,42 @@ def write_gazebo_launch(package_name, robot_name, save_dir):
     file_name = os.path.join(save_dir, 'launch', 'gazebo.launch.py')
     with open(file_name, mode='w') as f:
         f.write(file_text)
+
+def write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
+
+    try:
+        os.mkdir(save_dir + '/urdf')
+    except:
+        pass
+
+    file_name = save_dir + '/urdf/{}.ros2_control.xacro'.format(robot_name)
+
+    with open(file_name, mode='w') as f:
+        f.write('<?xml version="1.0" ?>\n')
+        f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro">\n'.format(robot_name))
+        f.write('\n')
+
+        f.write('  <ros2_control name="GazeboSimSystem" type="system">\n')
+        f.write('\n')
+
+        f.write('    <hardware>\n')
+        f.write('      <plugin>gz_ros2_control/GazeboSimSystem</plugin>\n')
+        f.write('    </hardware>\n')
+        f.write('\n')
+
+        for joint in joints_dict:
+            joint_type = joints_dict[joint]['type']
+
+            if joint_type == 'fixed':
+                continue
+
+            f.write('    <joint name="{}">\n'.format(joint))
+            f.write('      <command_interface name="position"/>\n')
+            f.write('      <state_interface name="position"/>\n')
+            f.write('      <state_interface name="velocity"/>\n')
+            f.write('    </joint>\n')
+            f.write('\n')
+
+        f.write('  </ros2_control>\n')
+        f.write('\n')
+        f.write('</robot>\n')
