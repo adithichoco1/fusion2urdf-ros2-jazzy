@@ -1,0 +1,68 @@
+[0.798s] Invoking command in '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/Assem1_backup_6_description build --build-base /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build install --record /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/install.log --install-scripts $base/lib/Assem1_backup_6_description --single-version-externally-managed install_data
+[0.885s] /usr/lib/python3/dist-packages/setuptools/dist.py:744: SetuptoolsDeprecationWarning: Invalid dash-separated options
+[0.885s] !!
+[0.885s] 
+[0.885s]         ********************************************************************************
+[0.885s]         Usage of dash-separated 'script-dir' will not be supported in future
+[0.885s]         versions. Please use the underscore name 'script_dir' instead.
+[0.885s] 
+[0.886s]         This deprecation is overdue, please update your project and remove deprecated
+[0.886s]         calls to avoid build errors in the future.
+[0.886s] 
+[0.886s]         See https://setuptools.pypa.io/en/latest/userguide/declarative_config.html for details.
+[0.886s]         ********************************************************************************
+[0.886s] 
+[0.886s] !!
+[0.886s]   opt = self.warn_dash_deprecation(opt, section)
+[0.964s] running egg_info
+[0.964s] creating build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info
+[0.975s] writing build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/PKG-INFO
+[0.975s] writing dependency_links to build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/dependency_links.txt
+[0.975s] writing requirements to build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/requires.txt
+[0.975s] writing top-level names to build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/top_level.txt
+[0.975s] writing manifest file 'build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/SOURCES.txt'
+[0.997s] reading manifest file 'build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/SOURCES.txt'
+[0.997s] writing manifest file 'build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info/SOURCES.txt'
+[0.997s] running build
+[0.997s] running build_py
+[0.998s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build
+[0.998s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build/lib
+[0.998s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build/lib/Assem1_backup_6_description
+[0.998s] copying Assem1_backup_6_description/__init__.py -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build/lib/Assem1_backup_6_description
+[0.998s] running install
+[1.001s] running install_lib
+[1.012s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages/Assem1_backup_6_description
+[1.013s] copying /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build/lib/Assem1_backup_6_description/__init__.py -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages/Assem1_backup_6_description
+[1.013s] byte-compiling /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages/Assem1_backup_6_description/__init__.py to __init__.cpython-312.pyc
+[1.013s] running install_data
+[1.013s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/ament_index
+[1.013s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/ament_index/resource_index
+[1.013s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/ament_index/resource_index/packages
+[1.013s] copying resource/Assem1_backup_6_description -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/ament_index/resource_index/packages
+[1.013s] copying package.xml -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description
+[1.013s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/launch
+[1.014s] copying launch/display.launch.py -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/launch
+[1.014s] copying launch/gazebo.launch.py -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/launch
+[1.014s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] copying urdf/materials.xacro -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] copying urdf/Assem1_backup_6.xacro -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] copying urdf/Assem1_backup_6.gazebo -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] copying urdf/Assem1_backup_6.ros2_control.xacro -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] copying urdf/Assem1_backup_6.trans -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/urdf
+[1.014s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.014s] copying meshes/link1_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.014s] copying meshes/base_link.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.014s] copying meshes/link6_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.014s] copying meshes/link3_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] copying meshes/link7_2.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] copying meshes/link5_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] copying meshes/link2_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] copying meshes/link7_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] copying meshes/link4_1.stl -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/meshes
+[1.015s] creating /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/config
+[1.015s] copying config/display.rviz -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/share/Assem1_backup_6_description/config
+[1.015s] running install_egg_info
+[1.027s] Copying build/Assem1_backup_6_description/Assem1_backup_6_description.egg-info to /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages/Assem1_backup_6_description-0.0.0-py3.12.egg-info
+[1.028s] running install_scripts
+[1.112s] writing list of installed files to '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/install.log'
+[1.134s] Invoked command in '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/install/Assem1_backup_6_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/Assem1_backup_6_description build --build-base /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/build install --record /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_6_description/build/Assem1_backup_6_description/install.log --install-scripts $base/lib/Assem1_backup_6_description --single-version-externally-managed install_data

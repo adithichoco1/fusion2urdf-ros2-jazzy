@@ -33,6 +33,13 @@ def generate_launch_description():
         ]
     )
 
+    clock_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
     joint_state_publisher_node = Node(
         condition=UnlessCondition(show_gui),
         package='joint_state_publisher',
@@ -60,6 +67,7 @@ def generate_launch_description():
         robot_state_publisher_node,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
+        clock_bridge,
         rviz_node
     ])
 """

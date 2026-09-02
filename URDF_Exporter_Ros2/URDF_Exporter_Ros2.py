@@ -82,6 +82,7 @@ def run(context):
         Write.write_display_launch(package_name, robot_name, save_dir)
         Write.write_gazebo_launch(package_name, robot_name, save_dir)
         Write.write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir)
+        Write.write_controllers_yaml(joints_dict, package_name, robot_name, save_dir)
         # copy over package files
         utils.create_package(package_name, save_dir, package_dir)
         utils.update_setup_py(save_dir, package_name)

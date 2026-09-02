@@ -334,3 +334,39 @@ def write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package
         f.write('  </ros2_control>\n')
         f.write('\n')
         f.write('</robot>\n')
+
+def write_controllers_yaml(joints_dict, package_name, robot_name, save_dir):
+
+    try:
+        os.mkdir(save_dir + '/config')
+    except:
+        pass
+
+    file_name = save_dir + '/config/controllers.yaml'
+
+    with open(file_name, mode='w') as f:
+        f.write('controller_manager:\n')
+        f.write('  ros__parameters:\n')
+        f.write('    update_rate: 100\n')
+        f.write('\n')
+        f.write('    arm_controller:\n')
+        f.write('      type: joint_trajectory_controller/JointTrajectoryController\n')
+        f.write('\n')
+
+        f.write('arm_controller:\n')
+        f.write('  ros__parameters:\n')
+        f.write('    joints:\n')
+
+        for joint in joints_dict:
+            if joints_dict[joint]['type'] == 'fixed':
+                continue
+
+            f.write('      - "{}"\n'.format(joint))
+
+        f.write('\n')
+        f.write('    command_interfaces:\n')
+        f.write('      - position\n')
+        f.write('\n')
+        f.write('    state_interfaces:\n')
+        f.write('      - position\n')
+        f.write('      - velocity\n')
