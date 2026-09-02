@@ -65,11 +65,11 @@ def generate_launch_description():
 """
 
 gazebo_launch = """from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
 import os
 import xacro
 from ament_index_python.packages import get_package_share_directory
@@ -91,51 +91,33 @@ def generate_launch_description():
         ]
     )
 
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher'
-    )
-
-    gazebo_server = IncludeLaunchDescription(
+    gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
+                FindPackageShare('ros_gz_sim'),
                 'launch',
-                'gzserver.launch.py'
+                'gz_sim.launch.py'
             ])
         ]),
         launch_arguments={
-            'pause': 'true'
+            'gz_args': '-r empty.sdf'
         }.items()
     )
 
-    gazebo_client = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare('gazebo_ros'),
-                'launch',
-                'gzclient.launch.py'
-            ])
-        ])
-    )
-
-    urdf_spawn_node = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
+    spawn_robot = Node(
+        package='ros_gz_sim',
+        executable='create',
         arguments=[
-            '-entity', '%s',
-            '-topic', 'robot_description'
+            '-topic', 'robot_description',
+            '-name', '%s'
         ],
         output='screen'
     )
 
     return LaunchDescription([
         robot_state_publisher_node,
-        joint_state_publisher_node,
-        gazebo_server,
-        gazebo_client,
-        urdf_spawn_node,
+        gazebo,
+        spawn_robot,
     ])
 """
 
