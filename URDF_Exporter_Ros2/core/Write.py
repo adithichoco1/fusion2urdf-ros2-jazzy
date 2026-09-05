@@ -208,6 +208,20 @@ to swap component1<=>component2"
         f.write('</robot>\n')
 
 def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
+    """
+    FIXES applied here (see chat explanation for details):
+      1. The gz_ros2_control plugin block previously had no <parameters> element, so
+         controller_manager never knew where controllers.yaml was and loaded zero
+         controllers - nothing in controllers.yaml ever took effect.
+      2. "Gazebo/Silver" is a classic-Gazebo (Ogre1) material-script name. gz-sim's
+         Ogre2 renderer doesn't resolve these; links rendered flat default grey.
+         Replaced with an explicit ambient/diffuse/specular <material> block.
+      3. Bare <mu1>/<mu2> as direct children of <gazebo reference="..."> was a
+         classic-Gazebo-only URDF-extension shorthand that the modern URDF->SDF
+         conversion path doesn't reliably honor. Replaced with the SDF-native
+         <collision><surface><friction><ode><mu>/<mu2></ode></friction></surface>
+         </collision> form, which is unambiguous under gz-sim.
+    """
     try: os.mkdir(save_dir + '/urdf')
     except: pass
 
@@ -218,8 +232,6 @@ def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name,
         f.write('<?xml version="1.0" ?>\n')
         f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
         f.write('\n')
-        f.write('<xacro:property name="body_color" value="Gazebo/Silver" />\n')
-        f.write('\n')
 
         gazebo = Element('gazebo')
         plugin = SubElement(gazebo, 'plugin')
@@ -227,14 +239,32 @@ def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name,
             'name': 'gz_ros2_control::GazeboSimROS2ControlPlugin',
             'filename': 'libgz_ros2_control-system.so'
         }
+        # FIX 1: point the plugin at controllers.yaml so controller_manager actually
+        # loads the controllers write_controllers_yaml() generates.
+        parameters = SubElement(plugin, 'parameters')
+        parameters.text = '$(find {})/config/controllers.yaml'.format(package_name)
         gazebo_xml = "\n".join(utils.prettify(gazebo).split("\n")[1:])
         f.write(gazebo_xml)
 
         # for base_link
         f.write('<gazebo reference="base_link">\n')
-        f.write('  <material>${body_color}</material>\n')
-        f.write('  <mu1>0.2</mu1>\n')
-        f.write('  <mu2>0.2</mu2>\n')
+        f.write('  <visual>\n')
+        f.write('    <material>\n')
+        f.write('      <ambient>0.7 0.7 0.7 1</ambient>\n')
+        f.write('      <diffuse>0.7 0.7 0.7 1</diffuse>\n')
+        f.write('      <specular>0.3 0.3 0.3 1</specular>\n')
+        f.write('    </material>\n')
+        f.write('  </visual>\n')
+        f.write('  <collision>\n')
+        f.write('    <surface>\n')
+        f.write('      <friction>\n')
+        f.write('        <ode>\n')
+        f.write('          <mu>0.2</mu>\n')
+        f.write('          <mu2>0.2</mu2>\n')
+        f.write('        </ode>\n')
+        f.write('      </friction>\n')
+        f.write('    </surface>\n')
+        f.write('  </collision>\n')
         f.write('  <self_collide>true</self_collide>\n')
         f.write('  <gravity>true</gravity>\n')
         f.write('</gazebo>\n')
@@ -244,9 +274,23 @@ def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name,
         for joint in joints_dict:
             name = joints_dict[joint]['child']
             f.write('<gazebo reference="{}">\n'.format(name))
-            f.write('  <material>${body_color}</material>\n')
-            f.write('  <mu1>0.2</mu1>\n')
-            f.write('  <mu2>0.2</mu2>\n')
+            f.write('  <visual>\n')
+            f.write('    <material>\n')
+            f.write('      <ambient>0.7 0.7 0.7 1</ambient>\n')
+            f.write('      <diffuse>0.7 0.7 0.7 1</diffuse>\n')
+            f.write('      <specular>0.3 0.3 0.3 1</specular>\n')
+            f.write('    </material>\n')
+            f.write('  </visual>\n')
+            f.write('  <collision>\n')
+            f.write('    <surface>\n')
+            f.write('      <friction>\n')
+            f.write('        <ode>\n')
+            f.write('          <mu>0.2</mu>\n')
+            f.write('          <mu2>0.2</mu2>\n')
+            f.write('        </ode>\n')
+            f.write('      </friction>\n')
+            f.write('    </surface>\n')
+            f.write('  </collision>\n')
             f.write('  <self_collide>true</self_collide>\n')
             f.write('</gazebo>\n')
             f.write('\n')
@@ -336,6 +380,12 @@ def write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package
         f.write('</robot>\n')
 
 def write_controllers_yaml(joints_dict, package_name, robot_name, save_dir):
+    """
+    FIX: added joint_state_broadcaster. Without it, controller_manager never
+    publishes /joint_states, so robot_state_publisher can't compute TF for any
+    non-fixed joint - the robot looks frozen/collapsed in RViz even though
+    Gazebo and arm_controller are both running fine.
+    """
 
     try:
         os.mkdir(save_dir + '/config')
@@ -348,6 +398,9 @@ def write_controllers_yaml(joints_dict, package_name, robot_name, save_dir):
         f.write('controller_manager:\n')
         f.write('  ros__parameters:\n')
         f.write('    update_rate: 100\n')
+        f.write('\n')
+        f.write('    joint_state_broadcaster:\n')
+        f.write('      type: joint_state_broadcaster/JointStateBroadcaster\n')
         f.write('\n')
         f.write('    arm_controller:\n')
         f.write('      type: joint_trajectory_controller/JointTrajectoryController\n')
