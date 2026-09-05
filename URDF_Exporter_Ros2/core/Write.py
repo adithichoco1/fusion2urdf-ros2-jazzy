@@ -381,45 +381,66 @@ def write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package
 
 def write_controllers_yaml(joints_dict, package_name, robot_name, save_dir):
     """
-    FIX: added joint_state_broadcaster. Without it, controller_manager never
-    publishes /joint_states, so robot_state_publisher can't compute TF for any
-    non-fixed joint - the robot looks frozen/collapsed in RViz even though
-    Gazebo and arm_controller are both running fine.
+    Generate the ros2_control controller configuration.
+
+    Generates:
+      - joint_state_broadcaster
+      - arm_controller using JointTrajectoryController
+
+    Only non-fixed joints are added to arm_controller.
     """
 
-    try:
-        os.mkdir(save_dir + '/config')
-    except:
-        pass
+    # Create config directory if it does not exist
+    config_dir = os.path.join(save_dir, 'config')
+    os.makedirs(config_dir, exist_ok=True)
 
-    file_name = save_dir + '/config/controllers.yaml'
+    file_name = os.path.join(config_dir, 'controllers.yaml')
 
+    # Collect movable joints
+    movable_joints = []
+
+    for joint_name, joint_data in joints_dict.items():
+        if joint_data['type'] == 'fixed':
+            continue
+
+        movable_joints.append(joint_name)
+
+    # Write controller configuration
     with open(file_name, mode='w') as f:
+
         f.write('controller_manager:\n')
         f.write('  ros__parameters:\n')
         f.write('    update_rate: 100\n')
         f.write('\n')
+
+        # Joint state broadcaster
         f.write('    joint_state_broadcaster:\n')
         f.write('      type: joint_state_broadcaster/JointStateBroadcaster\n')
         f.write('\n')
+
+        # Main trajectory controller
         f.write('    arm_controller:\n')
         f.write('      type: joint_trajectory_controller/JointTrajectoryController\n')
         f.write('\n')
 
+        # Controller parameters
         f.write('arm_controller:\n')
         f.write('  ros__parameters:\n')
+
+        # Joints
         f.write('    joints:\n')
 
-        for joint in joints_dict:
-            if joints_dict[joint]['type'] == 'fixed':
-                continue
-
-            f.write('      - "{}"\n'.format(joint))
+        for joint_name in movable_joints:
+            f.write('      - "{}"\n'.format(joint_name))
 
         f.write('\n')
+
+        # Command interfaces
         f.write('    command_interfaces:\n')
         f.write('      - position\n')
         f.write('\n')
+
+        # State interfaces
         f.write('    state_interfaces:\n')
         f.write('      - position\n')
         f.write('      - velocity\n')

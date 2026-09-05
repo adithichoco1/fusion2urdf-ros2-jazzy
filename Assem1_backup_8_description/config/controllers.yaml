@@ -6,7 +6,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     arm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      type: forward_command_controller/ForwardCommandController
 
 arm_controller:
   ros__parameters:
@@ -20,9 +20,4 @@ arm_controller:
       - "link2 to link3"
       - "base to link1"
 
-    command_interfaces:
-      - position
-
-    state_interfaces:
-      - position
-      - velocity
+    interface_name: position
