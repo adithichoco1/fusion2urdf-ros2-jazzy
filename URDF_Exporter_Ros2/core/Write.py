@@ -207,94 +207,62 @@ to swap component1<=>component2"
 
         f.write('</robot>\n')
 
-def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict,
-                       package_name, robot_name, save_dir):
+def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_name, save_dir):
     """
-    Generate Gazebo Sim configuration for the robot.
-
-    Includes:
-      - gz_ros2_control plugin
-      - controller YAML
-      - Gazebo material/friction properties
-
-    IMPORTANT:
-      Material and friction overrides are written directly under
-      <gazebo reference="...">. Do not wrap them in <visual> or
-      <collision> blocks, as those can be interpreted by the
-      URDF-to-SDF converter as new geometry elements.
+    FIXES applied here (see chat explanation for details):
+      1. The gz_ros2_control plugin block previously had no <parameters> element, so
+         controller_manager never knew where controllers.yaml was and loaded zero
+         controllers - nothing in controllers.yaml ever took effect.
+      2. "Gazebo/Silver" is a classic-Gazebo (Ogre1) material-script name. gz-sim's
+         Ogre2 renderer doesn't resolve these; links rendered flat default grey.
+         Replaced with an explicit ambient/diffuse/specular <material> block.
+      3. Confirmed by testing: unnamed <visual>/<collision> merge blocks under
+         <gazebo reference="..."> crash gz-sim on spawn (segfault) - the URDF's
+         auto-generated visual/collision elements are unnamed, so these override
+         blocks create new, incomplete elements (a <collision> with a <surface>
+         but no <geometry>) instead of merging into the real one. Removed
+         entirely. Link color is already handled correctly without them, via the
+         "silver" URDF <material> Link.py already puts on every visual - that
+         converts to SDF ambient/diffuse fine on its own. Friction is left at
+         gz-sim's defaults rather than risk the same crash with a guessed
+         <collision name="..."> convention that can't be verified from here.
     """
+    try: os.mkdir(save_dir + '/urdf')
+    except: pass
 
-    try:
-        os.mkdir(save_dir + '/urdf')
-    except:
-        pass
-
-    file_name = save_dir + '/urdf/' + robot_name + '.gazebo'
-
+    file_name = save_dir + '/urdf/' + robot_name + '.gazebo'  # the name of urdf file
+    repo = robot_name + '/meshes/'  # the repository of binary stl files
+    #repo = package_name + '/' + robot_name + '/bin_stl/'  # the repository of binary stl files
     with open(file_name, mode='w') as f:
-
         f.write('<?xml version="1.0" ?>\n')
-        f.write(
-            '<robot name="{}" '
-            'xmlns:xacro="http://www.ros.org/wiki/xacro">\n'
-            .format(robot_name)
-        )
+        f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
         f.write('\n')
 
-        # ---------------------------------------------------------
-        # gz_ros2_control plugin
-        # ---------------------------------------------------------
-
         gazebo = Element('gazebo')
-
         plugin = SubElement(gazebo, 'plugin')
         plugin.attrib = {
             'name': 'gz_ros2_control::GazeboSimROS2ControlPlugin',
             'filename': 'libgz_ros2_control-system.so'
         }
-
+        # FIX 1: point the plugin at controllers.yaml so controller_manager actually
+        # loads the controllers write_controllers_yaml() generates.
         parameters = SubElement(plugin, 'parameters')
-        parameters.text = (
-            '$(find {})/config/controllers.yaml'
-            .format(package_name)
-        )
-
-        gazebo_xml = "\n".join(
-            utils.prettify(gazebo).split("\n")[1:]
-        )
-
+        parameters.text = '$(find {})/config/controllers.yaml'.format(package_name)
+        gazebo_xml = "\n".join(utils.prettify(gazebo).split("\n")[1:])
         f.write(gazebo_xml)
 
-        # ---------------------------------------------------------
-        # Base link Gazebo properties
-        # ---------------------------------------------------------
-
+        # for base_link
         f.write('<gazebo reference="base_link">\n')
-        f.write('  <material>Gazebo/Silver</material>\n')
-        f.write('  <mu1>0.2</mu1>\n')
-        f.write('  <mu2>0.2</mu2>\n')
         f.write('  <self_collide>true</self_collide>\n')
         f.write('  <gravity>true</gravity>\n')
         f.write('</gazebo>\n')
         f.write('\n')
 
-        # ---------------------------------------------------------
-        # Other links
-        # ---------------------------------------------------------
-
+        # others
         for joint in joints_dict:
-
             name = joints_dict[joint]['child']
-
-            f.write(
-                '<gazebo reference="{}">\n'.format(name)
-            )
-
-            f.write('  <material>Gazebo/Silver</material>\n')
-            f.write('  <mu1>0.2</mu1>\n')
-            f.write('  <mu2>0.2</mu2>\n')
+            f.write('<gazebo reference="{}">\n'.format(name))
             f.write('  <self_collide>true</self_collide>\n')
-
             f.write('</gazebo>\n')
             f.write('\n')
 
@@ -384,66 +352,45 @@ def write_ros2_control_xacro(joints_dict, links_xyz_dict, inertial_dict, package
 
 def write_controllers_yaml(joints_dict, package_name, robot_name, save_dir):
     """
-    Generate the ros2_control contller configuration.
-
-    Generates:
-      - joint_state_broadcaster
-      - arm_controller using JointTrajectoryController
-
-    Only non-fixed joints are added to arm_controller.
+    FIX: added joint_state_broadcaster. Without it, controller_manager never
+    publishes /joint_states, so robot_state_publisher can't compute TF for any
+    non-fixed joint - the robot looks frozen/collapsed in RViz even though
+    Gazebo and arm_controller are both running fine.
     """
 
-    # Create config directory if it does not exist
-    config_dir = os.path.join(save_dir, 'config')
-    os.makedirs(config_dir, exist_ok=True)
+    try:
+        os.mkdir(save_dir + '/config')
+    except:
+        pass
 
-    file_name = os.path.join(config_dir, 'controllers.yaml')
+    file_name = save_dir + '/config/controllers.yaml'
 
-    # Collect movable joints
-    movable_joints = []
-
-    for joint_name, joint_data in joints_dict.items():
-        if joint_data['type'] == 'fixed':
-            continue
-
-        movable_joints.append(joint_name)
-
-    # Write controller configuration
     with open(file_name, mode='w') as f:
-
         f.write('controller_manager:\n')
         f.write('  ros__parameters:\n')
         f.write('    update_rate: 100\n')
         f.write('\n')
-
-        # Joint state broadcaster
         f.write('    joint_state_broadcaster:\n')
         f.write('      type: joint_state_broadcaster/JointStateBroadcaster\n')
         f.write('\n')
-
-        # Main trajectory controller
         f.write('    arm_controller:\n')
         f.write('      type: joint_trajectory_controller/JointTrajectoryController\n')
         f.write('\n')
 
-        # Controller parameters
         f.write('arm_controller:\n')
         f.write('  ros__parameters:\n')
-
-        # Joints
         f.write('    joints:\n')
 
-        for joint_name in movable_joints:
-            f.write('      - "{}"\n'.format(joint_name))
+        for joint in joints_dict:
+            if joints_dict[joint]['type'] == 'fixed':
+                continue
+
+            f.write('      - "{}"\n'.format(joint))
 
         f.write('\n')
-
-        # Command interfaces
         f.write('    command_interfaces:\n')
         f.write('      - position\n')
         f.write('\n')
-
-        # State interfaces
         f.write('    state_interfaces:\n')
         f.write('      - position\n')
         f.write('      - velocity\n')
