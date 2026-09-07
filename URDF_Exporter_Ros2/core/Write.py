@@ -113,6 +113,7 @@ to swap component1<=>component2"
             f.write(joint.joint_xml)
             f.write('\n')
 
+
 def write_gazebo_endtag(file_name):
     """
     Write about gazebo_plugin and the </robot> tag at the end of the urdf
@@ -139,8 +140,8 @@ def write_urdf(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_n
         f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/materials.xacro" />'.format(package_name))
         f.write('\n')
-        f.write('<xacro:include filename="$(find {})/urdf/{}.trans" />'.format(package_name, robot_name))
-        f.write('\n')
+        #f.write('<xacro:include filename="$(find {})/urdf/{}.trans" />'.format(package_name, robot_name))
+        #f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/{}.ros2_control.xacro" />'.format(package_name, robot_name))
         f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/{}.gazebo" />'.format(package_name, robot_name))
