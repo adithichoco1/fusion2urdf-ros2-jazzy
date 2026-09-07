@@ -1,0 +1,35 @@
+[1.071s] Invoking command in '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/install/Assem1_backup_11_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/Assem1_backup_11_description build --build-base /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/build install --record /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/install.log --install-scripts $base/lib/Assem1_backup_11_description --single-version-externally-managed install_data
+[1.195s] /usr/lib/python3/dist-packages/setuptools/dist.py:744: SetuptoolsDeprecationWarning: Invalid dash-separated options
+[1.195s] !!
+[1.196s] 
+[1.196s]         ********************************************************************************
+[1.196s]         Usage of dash-separated 'script-dir' will not be supported in future
+[1.196s]         versions. Please use the underscore name 'script_dir' instead.
+[1.196s] 
+[1.196s]         This deprecation is overdue, please update your project and remove deprecated
+[1.196s]         calls to avoid build errors in the future.
+[1.196s] 
+[1.196s]         See https://setuptools.pypa.io/en/latest/userguide/declarative_config.html for details.
+[1.196s]         ********************************************************************************
+[1.196s] 
+[1.196s] !!
+[1.196s]   opt = self.warn_dash_deprecation(opt, section)
+[1.273s] running egg_info
+[1.283s] writing build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/PKG-INFO
+[1.284s] writing dependency_links to build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/dependency_links.txt
+[1.284s] writing requirements to build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/requires.txt
+[1.284s] writing top-level names to build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/top_level.txt
+[1.305s] reading manifest file 'build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/SOURCES.txt'
+[1.307s] writing manifest file 'build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info/SOURCES.txt'
+[1.308s] running build
+[1.308s] running build_py
+[1.308s] running install
+[1.312s] running install_lib
+[1.323s] running install_data
+[1.324s] copying config/controllers.yaml -> /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/install/Assem1_backup_11_description/share/Assem1_backup_11_description/config
+[1.324s] running install_egg_info
+[1.335s] removing '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/install/Assem1_backup_11_description/lib/python3.12/site-packages/Assem1_backup_11_description-0.0.0-py3.12.egg-info' (and everything under it)
+[1.336s] Copying build/Assem1_backup_11_description/Assem1_backup_11_description.egg-info to /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/install/Assem1_backup_11_description/lib/python3.12/site-packages/Assem1_backup_11_description-0.0.0-py3.12.egg-info
+[1.336s] running install_scripts
+[1.429s] writing list of installed files to '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/install.log'
+[1.457s] Invoked command in '/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/install/Assem1_backup_11_description/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/Assem1_backup_11_description build --build-base /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/build install --record /home/adithi/Desktop/Astra_tasks/fusion2urdf-ros2-jazzy/Assem1_backup_11_description/build/Assem1_backup_11_description/install.log --install-scripts $base/lib/Assem1_backup_11_description --single-version-externally-managed install_data

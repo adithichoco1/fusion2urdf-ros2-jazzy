@@ -100,6 +100,15 @@ to swap component1<=>component2"
             axis=joints_dict[j]['axis'], parent=parent, child=child, \
             upper_limit=upper_limit, lower_limit=lower_limit)
             joint.make_joint_xml()
+
+            # ROS 2 Jazzy JointTrajectoryController needs velocity/effort
+            # limits for the generated non-fixed joints.
+            if joint_type != 'fixed':
+                limit = SubElement(joint.joint_xml, 'limit')
+                limit.attrib = {
+                    'effort': '100.0',
+                    'velocity': '1.0'
+                }
             joint.make_transmission_xml()
             f.write(joint.joint_xml)
             f.write('\n')

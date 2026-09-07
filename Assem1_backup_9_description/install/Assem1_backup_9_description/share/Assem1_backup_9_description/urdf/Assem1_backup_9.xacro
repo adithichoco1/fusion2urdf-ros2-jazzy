@@ -1,0 +1,253 @@
+<?xml version="1.0" ?>
+<robot name="Assem1_backup_9" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find Assem1_backup_9_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find Assem1_backup_9_description)/urdf/Assem1_backup_9.trans" />
+<xacro:include filename="$(find Assem1_backup_9_description)/urdf/Assem1_backup_9.ros2_control.xacro" />
+<xacro:include filename="$(find Assem1_backup_9_description)/urdf/Assem1_backup_9.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.32096261732139425 0.3973535564414369 0.022708294234917843" rpy="0 0 0"/>
+    <mass value="19.906301645732082"/>
+    <inertia ixx="0.029453950123244255" iyy="0.02941550655516245" izz="0.05389633127613891" ixy="-8.353443504782732e-05" iyz="-0.001277611049827737" ixz="0.0016049848288020307"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link2_1">
+  <inertial>
+    <origin xyz="-0.0029024212101332325 0.017145168690820112 0.07198645106641523" rpy="0 0 0"/>
+    <mass value="1.0970597323573128"/>
+    <inertia ixx="0.004872532654434991" iyy="0.005052725549690523" izz="0.0003363086484420852" ixy="-7.006254438177151e-05" iyz="-0.0001305662715153505" ixz="-0.0007452818692683244"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.389134 -0.434249 -0.107451" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.389134 -0.434249 -0.107451" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link4_1">
+  <inertial>
+    <origin xyz="0.02342628760601917 0.015280856368604101 0.0017796481898055272" rpy="0 0 0"/>
+    <mass value="0.4347027830833191"/>
+    <inertia ixx="0.00014347267344935744" iyy="0.00020989643662486235" izz="0.0002442708504998836" ixy="-7.528177554816384e-05" iyz="-5.940858740755006e-06" ixz="-7.556998292662653e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.5118 -0.539369 -0.31321" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.5118 -0.539369 -0.31321" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link5_1">
+  <inertial>
+    <origin xyz="-0.3045655054614098 0.18931497872187947 -0.5573827236419671" rpy="0 0 0"/>
+    <mass value="0.30977651883234375"/>
+    <inertia ixx="5.512423349235407e-05" iyy="7.738975874896359e-05" izz="7.812222474884445e-05" ixy="-1.454212615992212e-06" iyz="-1.112353731833049e-07" ixz="-1.9736310403958846e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.888253 -0.379218 -0.873822" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.888253 -0.379218 -0.873822" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link6_1">
+  <inertial>
+    <origin xyz="0.003113192572437029 0.0002022207220969685 0.00026495997305392427" rpy="0 0 0"/>
+    <mass value="0.07486737383821568"/>
+    <inertia ixx="9.822551996899187e-06" iyy="7.99318081799033e-06" izz="9.166729846153687e-06" ixy="8.09775267777979e-08" iyz="4.505897740515741e-07" ixz="2.7219474434819757e-08"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.605512 -0.569951 -0.318298" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.605512 -0.569951 -0.318298" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link7_2">
+  <inertial>
+    <origin xyz="0.02580011351123357 -0.0015034747726999642 0.008030328580473534" rpy="0 0 0"/>
+    <mass value="0.04151250498240259"/>
+    <inertia ixx="1.24553056203916e-06" iyy="1.1248219949466787e-05" izz="1.1579772583855674e-05" ixy="1.3569087372634903e-07" iyz="1.8828845531945054e-07" ixz="-1.17010886608801e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.616734 -0.586221 -0.309286" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link7_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.616734 -0.586221 -0.309286" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link7_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link7_1">
+  <inertial>
+    <origin xyz="0.02577825181720428 -0.0016391171829794882 0.008072872474929771" rpy="0 0 0"/>
+    <mass value="0.04151250498240259"/>
+    <inertia ixx="1.2511896451510018e-06" iyy="1.124636798255016e-05" izz="1.157596546853823e-05" ixy="1.8694386387171913e-07" iyz="1.9438628561310733e-07" ixz="-1.1866459496464449e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.61796 -0.55232 -0.320756" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.61796 -0.55232 -0.320756" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link3_1">
+  <inertial>
+    <origin xyz="0.005180267643946412 0.03136957192276918 0.02199639593893815" rpy="0 0 0"/>
+    <mass value="1.5122135759143192"/>
+    <inertia ixx="0.0011235500102946827" iyy="0.0018947821838299905" izz="0.002315113951900094" ixy="-0.0008506633719400636" iyz="-0.00012580227915787168" ixz="-0.00020964070323301054"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.414567 -0.448322 -0.280399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.414567 -0.448322 -0.280399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link1_1">
+  <inertial>
+    <origin xyz="0.02675437708651357 0.013630079114969607 0.06538740245389868" rpy="0 0 0"/>
+    <mass value="2.473771853197172"/>
+    <inertia ixx="0.004036901456048736" iyy="0.005394826318981083" izz="0.004404221508723549" ixy="-0.001501460649946662" iyz="-0.0012891402787913453" ixz="-0.001991266327783424"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.319788 -0.398288 -0.004747" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.319788 -0.398288 -0.004747" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Assem1_backup_9_description)/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="link1 to link2" type="continuous">
+  <origin xyz="0.069346 0.035961 0.102704" rpy="0 0 0"/>
+  <parent link="link1_1"/>
+  <child link="link2_1"/>
+  <axis xyz="0.548834 -0.832171 -0.079196"/>
+</joint>
+
+<joint name="link3 to link4" type="continuous">
+  <origin xyz="0.097233 0.091047 0.032811" rpy="0 0 0"/>
+  <parent link="link3_1"/>
+  <child link="link4_1"/>
+  <axis xyz="0.835876 0.545233 0.063509"/>
+</joint>
+
+<joint name="link4 to link5" type="continuous">
+  <origin xyz="0.376453 -0.160151 0.560612" rpy="0 0 0"/>
+  <parent link="link4_1"/>
+  <child link="link5_1"/>
+  <axis xyz="-0.085847 0.015573 0.996187"/>
+</joint>
+
+<joint name="link5 to link6" type="continuous">
+  <origin xyz="-0.282741 0.190733 -0.555524" rpy="0 0 0"/>
+  <parent link="link5_1"/>
+  <child link="link6_1"/>
+  <axis xyz="-0.994312 -0.064602 -0.084675"/>
+</joint>
+
+<joint name="link6 to link7_right" type="continuous">
+  <origin xyz="0.011222 0.01627 -0.009012" rpy="0 0 0"/>
+  <parent link="link6_1"/>
+  <child link="link7_2"/>
+  <axis xyz="0.100853 -0.31557 -0.943527"/>
+</joint>
+
+<joint name="link6 to link7_left" type="continuous">
+  <origin xyz="0.012448 -0.017631 0.002458" rpy="0 0 0"/>
+  <parent link="link6_1"/>
+  <child link="link7_1"/>
+  <axis xyz="-0.100853 0.31557 0.943527"/>
+</joint>
+
+<joint name="link2 to link3" type="continuous">
+  <origin xyz="0.025433 0.014073 0.172948" rpy="0 0 0"/>
+  <parent link="link2_1"/>
+  <child link="link3_1"/>
+  <axis xyz="0.548834 -0.832171 -0.079196"/>
+</joint>
+
+<joint name="base to link1" type="continuous">
+  <origin xyz="0.319788 0.398288 0.004747" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link1_1"/>
+  <axis xyz="0.065156 -0.051866 0.996526"/>
+</joint>
+
+</robot>
